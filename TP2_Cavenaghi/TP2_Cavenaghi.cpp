@@ -6,19 +6,27 @@ Vector3 pointCutCalculator(Vector3 begin, Vector3 end, float height);
 float AreaCalculator(Vector3 point0, Vector3 point1, Vector3 point2, float height);
 
 void main() {
+    //Definimos los 11 puntos que necesitamos: 8 puntos para el cubo + 3 puntos que formarán la piramide
     const int pointsAmount = 11;
+    //Altura a la que el cubo es cortado por un "plano" para formar la pirámide
     float heightCutPoint = 0.2f;
+
+    //Definimos la recta que corta al cubo y crea la piramide
     Vector3 cutCoord = { 0,heightCutPoint,0 };
+    //Creamos un array de puntos
     Vector3 points[pointsAmount];
 
+    //Recorremos el array y lo seteamos en 0
     for (int i = 0; i < pointsAmount; i++)     {
         points[i] = Vector3{ 0,0,0 };
     }
 
+    //Definimos nuestros 3 puntos base
     points[0] = { 0,0,0 };
     points[1] = { 1,0.5f,0.5f };
     points[2] = { 0.5f,0.5f,-1 };
 
+    //Normalizamos y realizamos las operaciones necesarias para obtener los lados y que estos tengan el mismo módulo
     points[0] = Vector3Normalize(points[0]);
     points[1] = Vector3Normalize(points[1]);
     points[2] = Vector3Normalize(points[2]);
@@ -55,8 +63,12 @@ void main() {
     std::cout << std::endl;
 }
 
+
+//Calculamos los puntos donde el "plano" corta al cubo
 Vector3 pointCutCalculator(Vector3 begin, Vector3 end, float height) {
+    //Definimos el punto donde se produce el corte en 0
     Vector3 cutPoint = Vector3{ 0,0,0 };
+    //Definimos un vector formado por 2 puntos que conforman el principio y e final
     Vector3 vector = end - begin;
     Vector3 point = end;
     float landa = (height - point.y) / vector.y;
@@ -66,6 +78,7 @@ Vector3 pointCutCalculator(Vector3 begin, Vector3 end, float height) {
     return cutPoint;
 }
 
+//Calculamos el area de los lados de la piramide y los sumamos
 float AreaCalculator(Vector3 point0, Vector3 point1, Vector3 point2, float height) {
     const int size = 3;
     Vector3 pointsForBases[size];
