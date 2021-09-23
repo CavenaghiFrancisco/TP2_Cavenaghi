@@ -68,13 +68,17 @@ void main() {
 Vector3 pointCutCalculator(Vector3 begin, Vector3 end, float height) {
     //Definimos el punto donde se produce el corte en 0
     Vector3 cutPoint = Vector3{ 0,0,0 };
-    //Definimos un vector formado por 2 puntos que conforman el principio y e final
+    //Definimos un vector formado por 2 puntos que conforman el principio y el final de la arista que queremos que se corte con el "plano"
     Vector3 vector = end - begin;
+    //Definimos el punto final de la arista
     Vector3 point = end;
+    //
     float landa = (height - point.y) / vector.y;
+    //Le asignamos su correspondiente valor al punto donde se produce el corte
     cutPoint.x = point.x + vector.x * landa;
     cutPoint.z = point.z + vector.z * landa;
     cutPoint.y = height;
+    //Devolvemos el valor del punto
     return cutPoint;
 }
 
