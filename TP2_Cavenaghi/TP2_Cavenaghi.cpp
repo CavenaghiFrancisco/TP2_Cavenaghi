@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include "Vector3.h"
 
@@ -6,9 +6,9 @@ Vector3 pointCutCalculator(Vector3 begin, Vector3 end, float height);
 float AreaCalculator(Vector3 point0, Vector3 point1, Vector3 point2, float height);
 
 void main() {
-    //Definimos los 11 puntos que necesitamos: 8 puntos para el cubo + 3 puntos que formar�n la piramide
+    //Definimos los 11 puntos que necesitamos: 8 puntos para el cubo + 3 puntos que formarán la piramide
     const int pointsAmount = 11;
-    //Altura a la que el cubo es cortado por un "plano" para formar la pir�mide
+    //Altura a la que el cubo es cortado por un "plano" para formar la pirámide
     float heightCutPoint = 0.2f;
 
     //Definimos la recta que corta al cubo y crea la piramide
@@ -26,7 +26,7 @@ void main() {
     points[1] = { 1,0.5f,0.5f };
     points[2] = { 0.5f,0.5f,-1 };
 
-    //Normalizamos y realizamos las operaciones necesarias para obtener los lados y que estos tengan el mismo m�dulo
+    //Normalizamos y realizamos las operaciones necesarias para obtener los lados y que estos tengan el mismo módulo
     points[0] = Vector3Normalize(points[0]);
     points[1] = Vector3Normalize(points[1]);
     points[2] = Vector3Normalize(points[2]);
@@ -72,7 +72,12 @@ Vector3 pointCutCalculator(Vector3 begin, Vector3 end, float height) {
     Vector3 vector = end - begin;
     //Definimos el punto final de la arista
     Vector3 point = end;
-    //
+    //Ecuacion Vectorial : punto que queremos = punto que conocemos y pertenece al vector - lamda * componentes del vector director
+                           //(x,y,z) = (px,py,pz) - λ(Vx,Vy,Vz)
+    /*                       x=px-λ*Vx
+    //Ecuaciónes Parametrica y=py-λ*Vy
+                             z=pz-λ*Vz
+    */
     float landa = (height - point.y) / vector.y;
     //Le asignamos su correspondiente valor al punto donde se produce el corte
     cutPoint.x = point.x + vector.x * landa;
